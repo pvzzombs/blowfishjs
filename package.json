@@ -12,7 +12,7 @@
     "minify": "uglifyjs dist/blowfish.js -c -m -o dist/blowfish.min.js"
   },
   "author": "pvzzombs",
-  "license": "MIT",
+  "license": "The Unlicense",
   "devDependencies": {
     "browserify": "^17.0.0",
     "uglify-js": "^3.17.4"
