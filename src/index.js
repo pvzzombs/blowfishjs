@@ -211,23 +211,16 @@ Blowfish.prototype = {
     this.data = [0, 0, 0, 0, 0, 0, 0, 0];
     this.key = [];
   },
-  initData: function(){
-    for(var i=0; i<8; i++){
-      this.data[i] = 0;
+  setDataFromArray: function(arr){
+    var len = arr.length > 8 ? 8 : arr.length;
+    for(var i=0; i<len; i++){
+      this.data[i] = (arr[i] & 0xff);
     }
   },
-  setData: function(arr){
-    this.initData();
-    var len = arr.length > 8 ? 8 : arr.length;
-
-    if(typeof arr === "string"){
-      for(var i=0; i<len; i++){
-        this.data[i] = arr.charCodeAt(i);
-      }
-    }else{
-      for(var i=0; i<len; i++){
-        this.data[i] = arr[i];
-      }
+  setDataFromString: function(str){
+    var len = str.length > 8 ? 8 : str.length;
+    for(var i=0; i<len; i++){
+      this.data[i] = (str.charCodeAt(i) & 0xff);
     }
   },
   setDataFromHexString: function(str){
@@ -238,20 +231,20 @@ Blowfish.prototype = {
     var j = 0;
     for(var i=0; i<16; i+=2){
       //console.log(str.substr(i, 2));
-      this.data[j] = parseInt(str.substr(i, 2), 16);
+      this.data[j] = (parseInt(str.substr(i, 2), 16) & 0xff);
       j++;
     }
   },
-  setKey: function(arr){
-    var len = arr.length > 56 ? 56 : arr.length;
-    if(typeof arr === "string"){
-      for(var i=0; i<len; i++){
-        this.key[i] = arr.charCodeAt(i);
-      }
-    }else{
-      for(var i=0; i<len; i++){
-        this.key[i] = arr[i];
-      }
+  setKeyFromArray: function(arr){
+    var len = arr.length > 8 ? 8 : arr.length;
+    for(var i=0; i<len; i++){
+      this.key[i] = (arr[i] & 0xff);
+    }
+  },
+  setKeyFromString: function(str){
+    var len = str.length > 8 ? 8 : str.length;
+    for(var i=0; i<len; i++){
+      this.key[i] = (str.charCodeAt(i) & 0xff);
     }
   },
   setKeyFromHexString: function(str){
@@ -263,7 +256,7 @@ Blowfish.prototype = {
     var j = 0;
     for(var i=0; i<str.length; i+=2){
       //console.log(str.substr(i, 2));
-      this.key[j] = parseInt(str.substr(i, 2), 16);
+      this.key[j] = (parseInt(str.substr(i, 2), 16) & 0xff);
       j++;
     }
   },

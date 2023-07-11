@@ -22,11 +22,17 @@ console.log(a.getDataAsString());
 console.log(a.getDataAsUint8Array());
 
 a.initState();
-a.setKey("abcdefgh");
+a.setKeyFromString("abcdefgh");
 a.prepareState();
-a.setData("abcdefgh");
+a.setDataFromString("abcdefgh");
 a.encrypt();
 console.log(a.getDataAsHexString());
 a.decrypt();
 console.log(a.getDataAsString());
 
+a.initState();
+a.setKeyFromString("abcdefgh");
+a.prepareState();
+a.setDataFromHexString("90cbd763ed79cf23");
+a.decrypt();
+console.log(a.getDataAsString());
