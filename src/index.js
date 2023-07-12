@@ -189,26 +189,26 @@ const N = 16;
 
 function Blowfish(){
   this.S = [
-    sbox0.slice(),
-    sbox1.slice(),
-    sbox2.slice(),
-    sbox3.slice()
+    new Uint32Array(sbox0),
+    new Uint32Array(sbox1),
+    new Uint32Array(sbox2),
+    new Uint32Array(sbox3)
   ];
   this.P = parray.slice();
-  this.data = [0, 0, 0, 0, 0, 0, 0, 0];
+  this.data = new Uint8Array([0, 0, 0, 0, 0, 0, 0, 0]);
   this.key = [];
 }
 
 Blowfish.prototype = {
   initState: function(){
     this.S = [
-      sbox0.slice(),
-      sbox1.slice(),
-      sbox2.slice(),
-      sbox3.slice()
+      new Uint32Array(sbox0),
+      new Uint32Array(sbox1),
+      new Uint32Array(sbox2),
+      new Uint32Array(sbox3)
     ];
     this.P = parray.slice();
-    this.data = [0, 0, 0, 0, 0, 0, 0, 0];
+    this.data = new Uint8Array([0, 0, 0, 0, 0, 0, 0, 0]);
     this.key = [];
   },
   setDataFromArray: function(arr){
@@ -237,12 +237,14 @@ Blowfish.prototype = {
   },
   setKeyFromArray: function(arr){
     var len = arr.length > 8 ? 8 : arr.length;
+    this.key = new Uint8Array(len);
     for(var i=0; i<len; i++){
       this.key[i] = (arr[i] & 0xff);
     }
   },
   setKeyFromString: function(str){
     var len = str.length > 8 ? 8 : str.length;
+    this.key = new Uint8Array(len);
     for(var i=0; i<len; i++){
       this.key[i] = (str.charCodeAt(i) & 0xff);
     }
@@ -253,6 +255,7 @@ Blowfish.prototype = {
       return;
     }
     //str length is even
+    this.key = new Uint8Array(str.length/2);
     var j = 0;
     for(var i=0; i<str.length; i+=2){
       //console.log(str.substr(i, 2));
