@@ -193,7 +193,7 @@ function Blowfish(){
     new Uint32Array(sbox2),
     new Uint32Array(sbox3)
   ];
-  this.P = parray.slice();
+  this.P = new Uint32Array(parray);
   this.data = new Uint8Array([0, 0, 0, 0, 0, 0, 0, 0]);
   this.key = [];
 }
@@ -206,7 +206,7 @@ Blowfish.prototype = {
       new Uint32Array(sbox2),
       new Uint32Array(sbox3)
     ];
-    this.P = parray.slice();
+    this.P = new Uint32Array(parray);
     this.data = new Uint8Array([0, 0, 0, 0, 0, 0, 0, 0]);
     this.key = [];
   },
