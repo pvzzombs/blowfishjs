@@ -35,3 +35,18 @@ npm run minify
 ```
 5. Grab and include blowfish.min.js from the `dist` folder into your project
 
+## Usage
+### Node or Browser
+```
+const Blowfish = require("blowfishjs"); //for Node (Not required in browser)
+var a = new Blowfish();
+a.initState();
+a.setKeyFromString("abcdefgh");
+a.prepareState();
+a,setDataFromString("abcdefgh");
+a.encrypt();
+console.log(a.getDataAsHexString());
+a.decrypt();
+console.log(a.getDataAsString());
+```
+
