@@ -8,7 +8,7 @@ N/A
   - [Node](#node)
   - [Browser](#browser)
 - [Usage](#usage)
-  - [Example](#example)
+- [Documentation](#documentation)
 
 ## Installation
 ### Node
@@ -74,4 +74,7 @@ console.log(a.getDataAsString());
     - [getDataAsHexString()]()
     - [getDataAsString()]()
     - [getDataAsUint8Array()]()
+
+## Documentation
+Documentation of **blowfishjs** is available [here](docs/blowfishjs.md)
 
