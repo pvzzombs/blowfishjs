@@ -67,9 +67,9 @@ console.log(a.getDataAsString());
     - [setKeyFromHexString(str)](docs/Setters/setKeyFromHexString.md)
 3. **Preparing state:** Use [prepareState()]() to mix the key with pbox and sbox
 4. **Setting the data:** Set the data with one of these:
-    - [setKeyFromArray(arr)](docs/Setters/setKeyFromArray.md)
-    - [setKeyFromString(str)](docs/Setters/setKeyFromString.md)
-    - [setKeyFromHexString(str)](docs/Setters/setKeyFromHexString.md)
+    - [setDataFromArray(arr)](docs/Setters/setDataFromArray.md)
+    - [setDataFromString(str)](docs/Setters/setDataFromString.md)
+    - [setDataFromHexString(str)](docs/Setters/setDataFromHexString.md)
 5. **Encryption and decryption:** Use [encrypt()](docs/Modifiers/encrypt.md) to encrypt the data, [decrypt()](docs/Modifiers/decrypt.md) to decrypt the data
 6. **Output:** Get the output with either:
     - [getDataAsHexString()](docs/Getters/getDataAsHexString.md)

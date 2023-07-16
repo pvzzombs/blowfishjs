@@ -20,6 +20,9 @@ This documents the functions of blowfishjs. Add separate markdown files for each
 | [setKeyFromArray](Setters/setKeyFromArray.md) | (add short decription) |
 | [setKeyFromString](Setters/setKeyFromString.md) | (add short description) |
 | [setKeyFromHexString](Setters/setKeyFromHexString.md) | (add short description) |
+| [setDataFromArray](Setters/setDataFromArray.md) | (add short description) |
+| [setDataFromString](Setters/setDataFromString.md) | (add short description) |
+| [setDataFromHexString](Setters/setDataFromHexString.md) | (add short description) |
 
 ## Modifiers
 | | |
