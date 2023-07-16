@@ -1,13 +1,14 @@
 ## blowfishjs
 N/A
 
+<!-- omit in toc -->
 ## Table Of Contents
 - [blowfishjs](#blowfishjs)
-- [Table Of Contents](#table-of-contents)
 - [Installation](#installation)
   - [Node](#node)
   - [Browser](#browser)
 - [Usage](#usage)
+  - [Example](#example)
 - [Documentation](#documentation)
 
 ## Installation
