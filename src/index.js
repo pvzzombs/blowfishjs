@@ -344,7 +344,6 @@ Blowfish.prototype = {
         this.S[i][j+1] = result[1];
       }
     }
-    return this;
   },
   encrypt: function(){
     var dataL = 0, dataR = 0;
@@ -361,7 +360,6 @@ Blowfish.prototype = {
     for(var i=0; i<4; i++){
       this.data[4+i] = (result[1] >> ((3-i)*8)) & 0xff;
     }
-    return this;
   },
   decrypt: function(){
     var dataL = 0, dataR = 0;
@@ -378,7 +376,6 @@ Blowfish.prototype = {
     for(var i=0; i<4; i++){
       this.data[4+i] = (result[1] >> ((3-i)*8)) & 0xff;
     }
-    return this;
   },
   getDataAsHexString: function(){
     var output = "";
