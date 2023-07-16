@@ -1,5 +1,9 @@
 ### `.initState()`
 Reset the internal state (data, key, pbox, sbox)
+#### Parameters:
+none
+#### Return value:
+`undefined`
 #### Example:
 ```
 const Blowfish = require("blowfishjs");
