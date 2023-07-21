@@ -194,7 +194,7 @@ function Blowfish(){
     new Uint32Array(sbox3)
   ];
   this.P = new Uint32Array(parray);
-  this.data = new Uint8Array([0, 0, 0, 0, 0, 0, 0, 0]);
+  this.data = new Uint8Array(8);
   this.key = [];
 }
 
@@ -207,17 +207,19 @@ Blowfish.prototype = {
       new Uint32Array(sbox3)
     ];
     this.P = new Uint32Array(parray);
-    this.data = new Uint8Array([0, 0, 0, 0, 0, 0, 0, 0]);
+    this.data = new Uint8Array(8);
     this.key = [];
   },
   setDataFromArray: function(arr){
     var len = arr.length > 8 ? 8 : arr.length;
+    this.data = new Uint8Array(8);
     for(var i=0; i<len; i++){
       this.data[i] = (arr[i] & 0xff);
     }
   },
   setDataFromString: function(str){
     var len = str.length > 8 ? 8 : str.length;
+    this.data = new Uint8Array(8);
     for(var i=0; i<len; i++){
       this.data[i] = (str.charCodeAt(i) & 0xff);
     }
@@ -227,6 +229,7 @@ Blowfish.prototype = {
       throw new Error("Expected length to be 8 bytes");
       return;
     }
+    this.data = new Uint8Array(8);
     var j = 0;
     for(var i=0; i<16; i+=2){
       //console.log(str.substr(i, 2));

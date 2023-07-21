@@ -36,3 +36,15 @@ a.prepareState();
 a.setDataFromHexString("90cbd763ed79cf23");
 a.decrypt();
 console.log(a.getDataAsString());
+
+a.initState();
+a.setKeyFromString("abcdefgh");
+a.prepareState();
+a.setDataFromHexString("90cbd763ed79cf23");
+a.decrypt();
+console.log(a.getDataAsString());
+a.setDataFromString("123");
+a.encrypt();
+console.log(a.getDataAsHexString());
+a.decrypt();
+console.log(a.getDataAsHexString());
