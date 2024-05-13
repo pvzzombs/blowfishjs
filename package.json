@@ -7,7 +7,7 @@
     "test": "test"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jasmine",
     "bundle": "browserify src/index.js --standalone Blowfish -o dist/blowfish.js",
     "minify": "uglifyjs dist/blowfish.js -c -m -o dist/blowfish.min.js"
   },
@@ -15,6 +15,7 @@
   "license": "The Unlicense",
   "devDependencies": {
     "browserify": "^17.0.0",
+    "jasmine": "^5.1.0",
     "uglify-js": "^3.17.4"
   }
 }
