@@ -10,7 +10,7 @@
     "test": "jasmine",
     "bundle": "browserify src/index.js --standalone Blowfish -o dist/blowfish.js",
     "minify": "uglifyjs dist/blowfish.js -c -m -o dist/blowfish.min.js",
-    "coverage": "c8 jasmine"
+    "coverage": "c8 --reporter=lcov jasmine"
   },
   "author": "pvzzombs",
   "license": "The Unlicense",
