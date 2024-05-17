@@ -11,90 +11,100 @@ describe("Blowfish initialization", function () {
   });
 });
 
-describe("Blowfish encryption", function () {
-  var b = new Blowfish();
-  it("must pass the 1st encryption test", function() {
-    b.initState();
-    b.setKeyFromHexString("0000000000000000");
-    b.prepareState();
-    b.setDataFromHexString("0000000000000000");
-    b.encrypt();
-    expect(b.getDataAsHexString().toLowerCase()).toBe("4EF997456198DD78".toLowerCase());
+describe("Blowfish data setup", function() {
+  var b;
+  beforeEach(function(){
+    b = new Blowfish();
   });
-  it("must pass the 2nd encryption test", function() {
+  it("must set data correctly from an array", function() {
+    var arr = [255, 255, 255, 255, 255, 255, 255, 255];
     b.initState();
-    b.setKeyFromHexString("FFFFFFFFFFFFFFFF");
-    b.prepareState();
-    b.setDataFromHexString("FFFFFFFFFFFFFFFF");
-    b.encrypt();
-    expect(b.getDataAsHexString().toLowerCase()).toBe("51866FD5B85ECB8A".toLowerCase());
+    b.setDataFromArray(arr);
+    expect(b.getDataAsHexString()).toBe("ffffffffffffffff");
   });
-  it("must pass the 3rd encryption test", function() {
+  it("must set data correctly from a string", function() {
+    var str = "abcdefgh";
     b.initState();
-    b.setKeyFromHexString("3000000000000000");
-    b.prepareState();
-    b.setDataFromHexString("1000000000000001");
-    b.encrypt();
-    expect(b.getDataAsHexString().toLowerCase()).toBe("7D856F9A613063F2".toLowerCase());
+    b.setDataFromString(str);
+    expect(b.getDataAsString()).toBe(str);
   });
-  it("must pass the 4th encryption test", function() {
+  it("must obtain data correctly to an array", function() {
     b.initState();
-    b.setKeyFromHexString("1111111111111111");
-    b.prepareState();
-    b.setDataFromHexString("1111111111111111");
-    b.encrypt();
-    expect(b.getDataAsHexString().toLowerCase()).toBe("2466DD878B963C9D".toLowerCase());
+    b.setDataFromString("qwertyui");
+    expect(b.getDataAsUint8Array()).toEqual(new Uint8Array([113, 119, 101, 114, 116, 121, 117, 105]));
   });
-  it("must pass the 5th encryption test", function() {
+  it("must set data correctly from a hexadecimal string", function() {
+    var hexStr = "beefbeefbeefbeef";
     b.initState();
-    b.setKeyFromHexString("0123456789ABCDEF");
-    b.prepareState();
-    b.setDataFromHexString("1111111111111111");
-    b.encrypt();
-    expect(b.getDataAsHexString().toLowerCase()).toBe("61F9C3802281B096".toLowerCase());
+    b.setDataFromHexString(hexStr);
+    expect(b.getDataAsHexString()).toBe(hexStr);
+  });
+  it("must throw error if hexadecimal string is less than 8 bytes", function() {
+    b.initState();
+    expect(function(){ b.setDataFromHexString("ff") }).toThrow();
   });
 });
 
-describe("Blowfish decryption", function () {
+describe("Blowfish encryption", function () {
+  // From: https://www.schneier.com/wp-content/uploads/2015/12/vectors-2.txt
   var b = new Blowfish();
-  it("must pass the 1st decryption test", function() {
-    b.initState();
-    b.setKeyFromHexString("0000000000000000");
-    b.prepareState();
-    b.setDataFromHexString("4EF997456198DD78");
-    b.decrypt();
-    expect(b.getDataAsHexString().toLowerCase()).toBe("0000000000000000".toLowerCase());
+  var testCases = 5;
+  var keyBytes = ["0000000000000000", "FFFFFFFFFFFFFFFF", "3000000000000000", "1111111111111111", "0123456789ABCDEF"];
+  var clearBytes = ["0000000000000000", "FFFFFFFFFFFFFFFF", "1000000000000001", "1111111111111111", "1111111111111111"];
+  var cipherBytes = ["4EF997456198DD78", "51866FD5B85ECB8A", "7D856F9A613063F2", "2466DD878B963C9D", "61F9C3802281B096"];
+  function generateTestName(num) {
+    return "must pass #" + (num + 1) + " encryption testcase";
+  }
+  function generateFunc(index) {
+    return function() {
+      b.initState();
+      b.setKeyFromHexString(keyBytes[index]);
+      b.prepareState();
+      b.setDataFromHexString(clearBytes[index]);
+      b.encrypt();
+      expect(b.getDataAsHexString()).toBe(cipherBytes[index]);
+    };
+  }
+  beforeAll(function() {
+    for(var i = 0; i < testCases; i++) {
+      keyBytes[i] = keyBytes[i].toLowerCase();
+      clearBytes[i] = clearBytes[i].toLowerCase();
+      cipherBytes[i] = cipherBytes[i].toLowerCase();
+    }
   });
-  it("must pass the 2nd decryption test", function() {
-    b.initState();
-    b.setKeyFromHexString("FFFFFFFFFFFFFFFF");
-    b.prepareState();
-    b.setDataFromHexString("51866FD5B85ECB8A");
-    b.decrypt();
-    expect(b.getDataAsHexString().toLowerCase()).toBe("FFFFFFFFFFFFFFFF".toLowerCase());
+  for(var i = 0; i < testCases; i++) {
+    it(generateTestName(i), generateFunc(i));
+  }
+});
+
+describe("Blowfish decryption", function () {
+  // From: https://www.schneier.com/wp-content/uploads/2015/12/vectors-2.txt
+  var b = new Blowfish();
+  var testCases = 5;
+  var keyBytes = ["0000000000000000", "FFFFFFFFFFFFFFFF", "3000000000000000", "1111111111111111", "0123456789ABCDEF"];
+  var clearBytes = ["0000000000000000", "FFFFFFFFFFFFFFFF", "1000000000000001", "1111111111111111", "1111111111111111"];
+  var cipherBytes = ["4EF997456198DD78", "51866FD5B85ECB8A", "7D856F9A613063F2", "2466DD878B963C9D", "61F9C3802281B096"];
+  function generateTestName(num) {
+    return "must pass #" + (num + 1) + " decryption testcase";
+  }
+  function generateFunc(index) {
+    return function() {
+      b.initState();
+      b.setKeyFromHexString(keyBytes[index]);
+      b.prepareState();
+      b.setDataFromHexString(cipherBytes[index]);
+      b.decrypt();
+      expect(b.getDataAsHexString()).toBe(clearBytes[index]);
+    };
+  }
+  beforeAll(function() {
+    for(var i = 0; i < testCases; i++) {
+      keyBytes[i] = keyBytes[i].toLowerCase();
+      clearBytes[i] = clearBytes[i].toLowerCase();
+      cipherBytes[i] = cipherBytes[i].toLowerCase();
+    }
   });
-  it("must pass the 3rd decryption test", function() {
-    b.initState();
-    b.setKeyFromHexString("3000000000000000");
-    b.prepareState();
-    b.setDataFromHexString("7D856F9A613063F2");
-    b.decrypt();
-    expect(b.getDataAsHexString().toLowerCase()).toBe("1000000000000001".toLowerCase());
-  });
-  it("must pass the 4th decryption test", function() {
-    b.initState();
-    b.setKeyFromHexString("1111111111111111");
-    b.prepareState();
-    b.setDataFromHexString("2466DD878B963C9D");
-    b.decrypt();
-    expect(b.getDataAsHexString().toLowerCase()).toBe("1111111111111111".toLowerCase());
-  });
-  it("must pass the 5th decryption test", function() {
-    b.initState();
-    b.setKeyFromHexString("0123456789ABCDEF");
-    b.prepareState();
-    b.setDataFromHexString("61F9C3802281B096");
-    b.decrypt();
-    expect(b.getDataAsHexString().toLowerCase()).toBe("1111111111111111".toLowerCase());
-  });
+  for(var i = 0; i < testCases; i++) {
+    it(generateTestName(i), generateFunc(i));
+  }
 });
