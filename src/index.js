@@ -43,7 +43,6 @@ Blowfish.prototype = {
   setDataFromHexString: function (str) {
     if (str.length != 16) {
       throw new Error("Expected length to be 8 bytes");
-      return;
     }
     this.data = new Uint8Array(8);
     var j = 0;
@@ -70,7 +69,6 @@ Blowfish.prototype = {
   setKeyFromHexString: function (str) {
     if (str.length % 2 > 0) {
       throw new Error("Expected length to be even");
-      return;
     }
     //str length is even
     this.key = new Uint8Array(str.length / 2);
