@@ -20,13 +20,13 @@ A blowfish algorithm written in javascript
 git clone https://github.com/pvzzombs/blowfishjs.git
 cd blowfishjs
 ```
-2. Run `npm install`
+2. Run `npm install` (or `yarn`)
 ```
 npm install
 ```
 3. Install as a dev dependency (Inside another node project or npm package)  
 ```
-npm install --save-dev path/to/blowfishjs
+npm install --save-dev path/to/blowfishjs # yarn add --dev path/to/blowfishjs
 ```
 ### Browser
 1. Clone or download the repository
@@ -34,15 +34,15 @@ npm install --save-dev path/to/blowfishjs
 git clone https://github.com/pvzzombs/blowfishjs.git
 cd blowfishjs
 ```
-2. Run `npm install`
+2. Run `npm install` (or `yarn`)
 ```
 npm install
 ```
-3. Run `npm run bundle`
+3. Run `npm run bundle` # yarn run bundle
 ```
 npm run bundle
 ```
-4. Run `npm run minify`
+4. Run `npm run minify` # yarn run minify
 ```
 npm run minify
 ```
