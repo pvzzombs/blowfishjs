@@ -26,7 +26,7 @@ npm install
 ```
 3. Install as a dev dependency (Inside another node project or npm package)  
 ```
-npm install --save-dev path/to/blowfishjs # yarn add --dev path/to/blowfishjs
+npm install --save-dev path/to/blowfishjs # or yarn add --dev path/to/blowfishjs
 ```
 ### Browser
 1. Clone or download the repository
@@ -38,11 +38,11 @@ cd blowfishjs
 ```
 npm install
 ```
-3. Run `npm run bundle` # yarn run bundle
+3. Run `npm run bundle` (or `yarn run bundle`)
 ```
 npm run bundle
 ```
-4. Run `npm run minify` # yarn run minify
+4. Run `npm run minify` (or `yarn run minify`)
 ```
 npm run minify
 ```
