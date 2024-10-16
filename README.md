@@ -1,6 +1,7 @@
 ## blowfishjs
 [![workflow](https://github.com/pvzzombs/blowfishjs/actions/workflows/node.js.yml/badge.svg)](https://github.com/pvzzombs/blowfishjs/actions)  
 [![codecov](https://codecov.io/gh/pvzzombs/blowfishjs/graph/badge.svg?token=ls54UCvAE0)](https://codecov.io/gh/pvzzombs/blowfishjs)  
+[![CodeFactor](https://www.codefactor.io/repository/github/pvzzombs/blowfishjs/badge)](https://www.codefactor.io/repository/github/pvzzombs/blowfishjs)  
 A blowfish algorithm written in javascript
 
 <!-- omit in toc -->
