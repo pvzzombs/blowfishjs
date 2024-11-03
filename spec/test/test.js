@@ -166,3 +166,33 @@ describe("Blowfish decryption", function () {
     it(generateTestName(i), generateFunc(i));
   }
 });
+
+describe("Blowfish encryption with varying key length", function () {
+  var b = new Blowfish();
+  var data = "FEDCBA9876543210".toLowerCase();
+  var keyBytes = ["F0", "F0E1", "F0E1D2C3B4A5968778", "F0E1D2C3B4A596877869", "F0E1D2C3B4A5968778695A"];
+  var cipherBytes = ["F9AD597C49DB005E", "E91D21C1D961A6D6", "15750E7A4F4EC577", "122BA70B3AB64AE0", "3A833C9AFFC537F6"];
+  function generateTestName(num) {
+    return "must pass #" + (num + 1) + " encryption testcase with varying key length";
+  }
+
+  function generateFunc(index) {
+    return function () {
+      b.initState();
+      b.setKeyFromHexString(keyBytes[index]);
+      b.prepareState();
+      b.setDataFromHexString(data);
+      b.encrypt();
+      expect(b.getDataAsHexString()).toBe(cipherBytes[index]);
+    };
+  }
+  beforeAll(function () {
+    for (var i = 0; i < keyBytes.length; i++) {
+      keyBytes[i] = keyBytes[i].toLowerCase();
+      cipherBytes[i] = cipherBytes[i].toLowerCase();
+    }
+  });
+  for (var i = 0; i < keyBytes.length; i++) {
+    it(generateTestName(i), generateFunc(i));
+  }
+});
