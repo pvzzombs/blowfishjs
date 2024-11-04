@@ -167,13 +167,13 @@ describe("Blowfish decryption", function () {
   }
 });
 
-describe("Blowfish encryption with varying key length", function () {
+describe("Blowfish encryption/decryption with varying key length", function () {
   var b = new Blowfish();
   var data = "FEDCBA9876543210".toLowerCase();
   var keyBytes = ["F0", "F0E1", "F0E1D2C3B4A5968778", "F0E1D2C3B4A596877869", "F0E1D2C3B4A5968778695A"];
   var cipherBytes = ["F9AD597C49DB005E", "E91D21C1D961A6D6", "15750E7A4F4EC577", "122BA70B3AB64AE0", "3A833C9AFFC537F6"];
   function generateTestName(num) {
-    return "must pass #" + (num + 1) + " encryption testcase with varying key length";
+    return "must pass #" + (num + 1) + " encryption/decryption testcase with varying key length";
   }
 
   function generateFunc(index) {
@@ -184,6 +184,8 @@ describe("Blowfish encryption with varying key length", function () {
       b.setDataFromHexString(data);
       b.encrypt();
       expect(b.getDataAsHexString()).toBe(cipherBytes[index]);
+      b.decrypt();
+      expect(b.getDataAsHexString()).toBe(data);
     };
   }
   beforeAll(function () {
